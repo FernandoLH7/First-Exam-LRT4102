@@ -1,0 +1,7 @@
+<launch>
+    <!-- Lanzar el nodo turtlesim_node del paquete turtlesim -->
+    <node pkg="turtlesim" type="turtlesim_node" name="turtlesim_node" output="screen"/>
+
+    <!-- Lanzar el script problema1.py del paquete First-Exam-LRT4102 -->
+    <node pkg="First-Exam-LRT4102" type="problema1.py" name="turtle_node" output="screen"/>
+</launch>
