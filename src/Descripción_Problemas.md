@@ -86,7 +86,9 @@ Creé un archivo .launch para ejecutar todo de una vez. Este archivo lanza el no
 
 Para ejecutarlo, simplemente usa este comando:
 
-'''roslaunch First-Exam-LRT4102 nombre_del_archivo.launch
+```python
+roslaunch First-Exam-LRT4102 nombre_del_archivo.launch
+```
 
 # Conclusión
 Ambos programas fueron diseñados para interactuar con el simulador turtlesim y solucionar los problemas planetados. Me aseguré de que el código fuera se entendiera bien agregando comentarios y mensajes de log para que sea más claro.
