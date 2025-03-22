@@ -56,7 +56,7 @@ El programa `problema2.py` controla el movimiento de las tortugas creadas en el 
    - Creé un bucle que calcula hacia dónde deben moverse las tortugas y con qué velocidad.
    - También agregué condiciones para evitar que las tortugas se salgan del área del simulador.
 
-### **¿Por qué lo hice así?**
+### **¿Que lógica seguí?**
 - Usé suscriptores y publicadores porque es la forma estándar de interactuar con los tópicos en ROS.
 - Agregué mensajes de log para saber qué estaba haciendo cada tortuga en cada momento.
 
