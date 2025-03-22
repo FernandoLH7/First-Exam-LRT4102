@@ -1,95 +1,101 @@
-# Descripción de los Problemas
+# Problem Description
 
-Este documento explica cómo resolví los problemas planteados en el examen. Aquí detallo paso a paso lo que hice en los programas `problema1.py` y `problema2.py`, explicando las decisiones que tomé y cómo llegué a la solución. Espero que quede claro y fácil de entender.
-
----
-
-## Problema 1: Manejo de Tortugas en Turtlesim
-
-### **¿Qué hace este programa?**
-El programa `problema1.py` interactúa con el simulador `turtlesim` para hacer dos cosas principales:
-1. Borrar la tortuga que aparece por defecto en el simulador (`turtle1`).
-2. Crear varias tortugas en posiciones aleatorias dentro del área del simulador.
-
-### **¿Cómo lo resolví?**
-1. **Primero, inicialicé el nodo de ROS**:
-   - Usé la librería `rospy` para crear un nodo llamado `nodo_tortugas`. Esto es obligatorio para que el programa pueda comunicarse con ROS.
-   - Básicamente, el nodo es como el "cerebro" del programa que controla todo.
-
-2. **Después, eliminé la tortuga inicial**:
-   - Usé el servicio `/kill` que viene con `turtlesim`. Este servicio permite eliminar tortugas por su nombre.
-   - Creé un método llamado `borrar_tortuga_inicial` que espera a que el servicio esté disponible y luego lo llama para borrar la tortuga llamada `turtle1`.
-
-3. **Luego, generé tortugas en posiciones aleatorias**:
-   - Usé el servicio `/spawn` para crear nuevas tortugas.
-   - En el método `crear_tortugas_random`, generé coordenadas aleatorias para las posiciones de las tortugas usando la librería `random`.
-   - Les di nombres únicos como `tortuga1`, `tortuga2`, etc., para que no hubiera conflictos.
-
-4. **Finalmente, lo junté todo en el bloque principal**:
-   - Creé una instancia de la clase `Tortugas`.
-   - Llamé al método para borrar la tortuga inicial y luego al método para crear 5 tortugas nuevas.
-
-### **¿Por qué lo hice así?**
-- Usé una clase (`Tortugas`) para organizar mejor el código y que fuera más fácil de entender.
-- Agregué mensajes de log (`rospy.loginfo`, `rospy.logwarn`, etc.) para que el programa me dijera qué estaba pasando en cada momento.
+This document explains how I solved the problems given in the exam. Here, I detail step by step what I did in the programs `problema1.py` and `problema2.py`, explaining the decisions I made and how I arrived at the solution. I hope it's clear and easy to understand.
 
 ---
 
-## Problema 2: Control de Movimiento de Tortugas
+## Problem 1: Managing Turtles in Turtlesim
 
-### **¿Qué hace este programa?**
-El programa `problema2.py` controla el movimiento de las tortugas creadas en el simulador `turtlesim`. La idea es que las tortugas se muevan de acuerdo a ciertas reglas que definí.
+### **What does this program do?**
+The program `problema1.py` interacts with the `turtlesim` simulator to perform two main tasks:
+1. Delete the default turtle that appears in the simulator (`turtle1`).
+2. Create several turtles in random positions within the simulator's area.
 
-### **¿Cómo lo resolví?**
-1. **Primero, inicialicé el nodo de ROS**:
-   - Igual que en el problema 1, creé un nodo llamado `nodo_movimiento` para manejar todo lo relacionado con el movimiento de las tortugas.
+### **How did I solve it?**
+1. **First, I initialized the ROS node**:
+   - I used the `rospy` library to create a node called `nodo_tortugas`. This is mandatory for the program to communicate with ROS.
+   - Basically, the node is like the "brain" of the program that controls everything.
 
-2. **Después, me suscribí a los tópicos de posición**:
-   - Usé el tópico `/turtleX/pose` (donde `X` es el número de la tortuga) para obtener la posición actual de cada tortuga.
-   - Esto me permitió saber dónde estaba cada tortuga en todo momento.
+2. **Then, I deleted the initial turtle**:
+   - I used the `/kill` service provided by `turtlesim`. This service allows deleting turtles by their name.
+   - I created a method called `borrar_tortuga_inicial` that waits for the service to be available and then calls it to delete the turtle named `turtle1`.
 
-3. **Luego, publiqué comandos de velocidad**:
-   - Usé el tópico `/turtleX/cmd_vel` para enviar comandos de velocidad lineal y angular a las tortugas.
-   - Básicamente, esto es lo que hace que las tortugas se muevan.
+3. **Next, I generated turtles in random positions**:
+   - I used the `/spawn` service to create new turtles.
+   - In the method `crear_tortugas_random`, I generated random coordinates for the turtles' positions using the `random` library.
+   - I gave each turtle a unique name like `tortuga1`, `tortuga2`, etc., to avoid conflicts.
 
-4. **Implementé la lógica de movimiento**:
-   - Creé un bucle que calcula hacia dónde deben moverse las tortugas y con qué velocidad.
-   - También agregué condiciones para evitar que las tortugas se salgan del área del simulador.
+4. **Finally, I put everything together in the main block**:
+   - I created an instance of the `Tortugas` class.
+   - I called the method to delete the initial turtle and then the method to create 5 new turtles.
 
-### **¿Que lógica seguí?**
-- Usé suscriptores y publicadores porque es la forma estándar de interactuar con los tópicos en ROS.
-- Agregué mensajes de log para saber qué estaba haciendo cada tortuga en cada momento.
+### **Why did I do it this way?**
+- I used a class (`Tortugas`) to better organize the code and make it easier to understand.
+- I added log messages (`rospy.loginfo`, `rospy.logwarn`, etc.) so the program could tell me what was happening at every moment.
 
 ---
 
-## ¿Cómo ejecutar los programas?
+## Problem 2: Controlling Turtle Movement
 
-### **Requisitos previos**
-1. Tener instalado ROS y el paquete `turtlesim`.
-2. Asegurarte de que los scripts `problema1.py` y `problema2.py` sean ejecutables. Para eso, usa este comando en la terminal:
+### **What does this program do?**
+The program `problema2.py` controls the movement of the turtles created in the `turtlesim` simulator. The idea is for the turtles to move according to certain rules I defined.
+
+### **How did I solve it?**
+1. **First, I initialized the ROS node**:
+   - Just like in Problem 1, I created a node called `nodo_movimiento` to handle everything related to the turtles' movement.
+
+2. **Then, I subscribed to the position topics**:
+   - I used the topic `/turtleX/pose` (where `X` is the turtle's number) to get the current position of each turtle.
+   - This allowed me to know where each turtle was at all times.
+
+3. **Next, I published velocity commands**:
+   - I used the topic `/turtleX/cmd_vel` to send linear and angular velocity commands to the turtles.
+   - Basically, this is what makes the turtles move.
+
+4. **I implemented the movement logic**:
+   - I created a loop that calculates where the turtles should move and at what speed.
+   - I also added conditions to prevent the turtles from leaving the simulator's area.
+
+### **What logic did I follow?**
+- I used subscribers and publishers because it's the standard way to interact with topics in ROS.
+- I added log messages to know what each turtle was doing at every moment.
+
+---
+
+## How to Run the Programs
+
+### **Prerequisites**
+1. Have ROS and the `turtlesim` package installed.
+2. Make sure the scripts `problema1.py` and `problema2.py` are executable. To do this, use this command in the terminal:
    ```bash
    chmod +x problema1.py problema2.py
 
-### **Lanzar los programas**
-Creé un archivo .launch para ejecutar todo de una vez. Este archivo lanza el nodo de turtlesim y los dos programas (problema1.py y problema2.py). Aquí está cómo se ve el archivo:
+## Launching the Programs
+I created a .launch file to run everything at once. This file launches the turtlesim node and both programs (problema1.py and problema2.py). Here's what the file looks like:
 
 <launch>
-    <!-- Lanzar el nodo turtlesim_node del paquete turtlesim -->
+    <!-- Launch the turtlesim_node from the turtlesim package -->
     <node pkg="turtlesim" type="turtlesim_node" name="turtlesim_node" output="screen"/>
 
-    <!-- Lanzar el script problema1.py -->
+    <!-- Launch the script problema1.py -->
     <node pkg="First-Exam-LRT4102" type="problema1" name="turtle_node" output="screen"/>
 
-    <!-- Lanzar el script problema2.py -->
+    <!-- Launch the script problema2.py -->
     <node pkg="First-Exam-LRT4102" type="problema2" name="movement_node" output="screen"/>
 </launch>
 
-Para ejecutarlo, simplemente usa este comando:
+To run it, simply use this command:
 
-```python
-roslaunch First-Exam-LRT4102 nombre_del_archivo.launch
-```
+'''python
+roslaunch First-Exam-LRT4102 launch_file_name.launch
+'''
 
-# Conclusión
-Ambos programas fueron diseñados para interactuar con el simulador turtlesim y solucionar los problemas planetados. Me aseguré de que el código fuera se entendiera bien agregando comentarios y mensajes de log para que sea más claro.
+---
 
+---
+
+## Conclusion
+
+Through this exam, I was able to successfully solve the proposed problems using ROS and the `turtlesim` simulator. In `problema1.py`, I managed to interact with ROS services to delete and create turtles dynamically, ensuring the program worked as expected. In `problema2.py`, I implemented logic to control the movement of turtles using ROS topics, which allowed me to apply concepts like subscribing to position data and publishing velocity commands.
+
+Overall, the results demonstrate a solid understanding of ROS fundamentals, including the use of services, topics, and `.launch` files to manage and automate tasks. This experience helped me reinforce my knowledge and improve my problem-solving skills in robotics programming.
