@@ -69,3 +69,25 @@ El programa `problema2.py` controla el movimiento de las tortugas creadas en el 
 2. Asegurarte de que los scripts `problema1.py` y `problema2.py` sean ejecutables. Para eso, usa este comando en la terminal:
    ```bash
    chmod +x problema1.py problema2.py
+
+### **Lanzar los programas**
+Creé un archivo .launch para ejecutar todo de una vez. Este archivo lanza el nodo de turtlesim y los dos programas (problema1.py y problema2.py). Aquí está cómo se ve el archivo:
+
+<launch>
+    <!-- Lanzar el nodo turtlesim_node del paquete turtlesim -->
+    <node pkg="turtlesim" type="turtlesim_node" name="turtlesim_node" output="screen"/>
+
+    <!-- Lanzar el script problema1.py -->
+    <node pkg="First-Exam-LRT4102" type="problema1" name="turtle_node" output="screen"/>
+
+    <!-- Lanzar el script problema2.py -->
+    <node pkg="First-Exam-LRT4102" type="problema2" name="movement_node" output="screen"/>
+</launch>
+
+Para ejecutarlo, simplemente usa este comando:
+
+roslaunch First-Exam-LRT4102 nombre_del_archivo.launch
+
+# Conclusión
+Ambos programas fueron diseñados para interactuar con el simulador turtlesim y solucionar los problemas planetados. Me aseguré de que el código fuera se entendiera bien agregando comentarios y mensajes de log para que sea más claro.
+
